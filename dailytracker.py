@@ -3,15 +3,21 @@ done=False
 namelist=[]
 durlist=[]
 activities=[]
-while done is False:
+day=input("enter date: ")
+while done == False:
     activity=input("enter activity:")
     startTime=float(input("enter start time:"))
     endTime=float(input("enter end time:"))
+    while endTime<startTime:
+        print("invalid time period")
+        startTime=float(input("enter start time:"))
+        endTime=float(input("enter end time:"))    
+
     dic={"name":activity,"started at": startTime, "ended at": endTime}
     activities.append(dic)
-    lmk=input("type 'True' if done:")
-    if lmk == "True":
-        done=True
+    choice=input(("press enter to add another activity, or type q to finish:"))
+    if choice.lower() == "q":
+        done = True
 for item in activities:
     start=item["started at"]
     end=item["ended at"]
@@ -23,5 +29,6 @@ for item in activities:
 print(namelist)
 print(durlist)
 plt.pie(durlist,labels=namelist,autopct='%1.1f%%')
+plt.title(f"{day} break down")
 plt.show()
     
